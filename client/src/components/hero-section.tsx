@@ -1,8 +1,36 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Mail, Github, MessageCircle } from "lucide-react";
 import { FaTwitter, FaTelegram, FaGithub } from "react-icons/fa";
 
 export default function HeroSection() {
+  const [typedText, setTypedText] = useState("");
+  const roles = [
+    "Cyber Threat Intelligence Analyst",
+    "OSINT Researcher", 
+    "Python Automation Specialist",
+    "Security Researcher"
+  ];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const currentRole = roles[currentRoleIndex];
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= currentRole.length) {
+        setTypedText(currentRole.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        setTimeout(() => {
+          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+        }, 2000);
+      }
+    }, 100);
+
+    return () => clearInterval(typingInterval);
+  }, [currentRoleIndex]);
+
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
     if (element) {
@@ -23,11 +51,12 @@ export default function HeroSection() {
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Hi, I'm <span className="gradient-text">Malik Muhammad Salman Zahid</span>
             </h1>
-            <h2 className="text-xl md:text-2xl text-slate-300 mb-6">
-              Cyber Threat Intelligence Analyst | OSINT Researcher | Python Automation
+            <h2 className="text-xl md:text-2xl text-slate-300 mb-6 h-8 flex items-center">
+              <span className="gradient-text">{typedText}</span>
+              <span className="animate-pulse text-cyan-400 ml-1">|</span>
             </h2>
             <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-              Aspiring CTI analyst from Pakistan, passionate about solving cyber threats with Python, automation, and open-source intelligence. Focused on building regional CTI visibility and empowering local organizations.
+              Aspiring CTI analyst from Pakistan, passionate about solving cyber threats with Python, automation, and open-source intelligence. Focused on building regional CTI visibility and empowering local organizations with actionable threat intelligence.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
