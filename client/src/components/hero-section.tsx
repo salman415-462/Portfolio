@@ -21,7 +21,7 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Hi, I'm <span className="gradient-text">Salman</span>
+              Hi, I'm <span className="gradient-text">Malik Muhammad Salman Zahid</span>
             </h1>
             <h2 className="text-xl md:text-2xl text-slate-300 mb-6">
               Cyber Threat Intelligence Analyst | OSINT Researcher | Python Automation
